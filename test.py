@@ -2,7 +2,7 @@ import os
 import datetime
 from tqdm import tqdm
 import torch
-from Dataset.datasets import CelebA, CelebA_Pre
+from Dataset.datasets import CelebA
 from tensorboardX import SummaryWriter
 import numpy as np
 import random
@@ -57,9 +57,7 @@ if __name__ == "__main__":
             legi_test = [l.rstrip() for l in lines]
 
     else:
-        with open("./Dataset/CelebA/legi_test.txt", 'r') as f:
-            lines = f.readlines()
-            legi_test = [l.rstrip() for l in lines]
+        raise ValueError("Mask_type [%s] not recognized. Please choose among ['face_mask', 'cnt_mask', 'irr_mask']  " % args.mask_type)
 
 
 
@@ -69,15 +67,10 @@ if __name__ == "__main__":
     ])
     mask_transforms = transforms.ToTensor()
 
-    if args.mask_type == "irr_mask":
-        mask_dir = args.irr_mask_dir
-        img_dir = ""
-    elif args.mask_type == "face_mask":
+    if args.mask_type == "face_mask":
         mask_dir = args.mask_dir
         img_dir = args.img_dir
-    elif args.mask_type == "cnt_mask":
-        mask_dir = ""
-        img_dir = ""
+
     else:
         raise ValueError("Mask_type [%s] not recognized. Please choose among ['face_mask', 'cnt_mask', 'irr_mask']  " % args.mask_type)
 

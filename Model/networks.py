@@ -12,7 +12,7 @@ from Tools.utils import extract_image_patches, flow_to_image, \
 from Model.spectral_norm import use_spectral_norm
 import numpy as np
 # import util.util as util
-from Tools.Selfpatch import Selfpatch
+# from Tools.Selfpatch import Selfpatch
 from .AttBlocks import DSA_Equal
 
 
@@ -62,23 +62,6 @@ class NLayerDiscriminator(nn.Module):
 
     def forward(self, input):
         return self.model(input)
-
-class Global_Discriminator(nn.Module):
-    def __init__(self, in_dim, out_dim):
-        super(Global_Discriminator, self).__init__()
-        self.in_dim = in_dim
-        self.cnum = out_dim
-        
-        self.dis_conv_module = DisConvModule(in_dim, out_dim)
-        self.linear = nn.Linear(out_dim*4, 1)
-
-    def forward(self, x):
-        x = self.dis_conv_module(x)
-        x = x.view(x.size(0), -1)
-        x = self.linear(x)
-
-# class Local_Discriminator(nn.Module):
-#     def __init__(self, in_dim, out_dim)
 
 
 class Local_Discriminator(nn.Module):

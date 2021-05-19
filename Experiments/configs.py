@@ -7,7 +7,7 @@ class Base_Config():
         self.img_dir  = "/data1/minmin/CelebA_With_Masks/"
         self.mask_dir  = "/data1/minmin/Binary_Masks/"
         self.data_dir = "/data1/minmin/CelebA/img_align_celeba/"
-        self.ckpt_dir = "/data1/minmin/model_weights/dilated_res_net2/"
+        self.ckpt_dir = "./model_weights/"
         self.dataset = "CelebA"
         self.visual_dir = "./Visual/"
         self.summary_dir = "./tfboards/"
@@ -343,8 +343,8 @@ class ISSUE_16_EXP7(Base_Config):
         self.sizes = (256, 256) 
 
         self.resume = False          # loading model from ckpt. 
-        self.which_epoch = ''        # loading from which epoch
-        self.model = "dilated_res_net2"  # [Unet or PSA]
+        self.which_epoch = '40'        # loading from which epoch
+        self.model = "dilated_res_net"  # [Unet or PSA]
         self.name = "ISSUE_16_EXP7"
         self.mode = mode          # which mode
         self.summary = True         # flg for tfboards

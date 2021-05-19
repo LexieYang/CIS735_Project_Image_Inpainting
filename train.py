@@ -68,27 +68,12 @@ if __name__ == "__main__":
 
     # Prepare dataset
     if args.mask_type == "face_mask":
-        with open("./Dataset/CelebA/face_mask/legi_test.txt", 'r') as f:
-            lines = f.readlines()
-            legi_test = [l.rstrip() for l in lines]
 
         with open("./Dataset/CelebA/face_mask/legi_train.txt", 'r') as f:
             lines = f.readlines()
             legi_train = [l.rstrip() for l in lines]
 
         with open("./Dataset/CelebA/face_mask/legi_eval.txt", 'r') as f:
-            lines = f.readlines()
-            legi_eval = [l.rstrip() for l in lines]
-    else:
-        with open("./Dataset/CelebA/legi_test.txt", 'r') as f:
-            lines = f.readlines()
-            legi_test = [l.rstrip() for l in lines]
-
-        with open("./Dataset/CelebA/legi_train.txt", 'r') as f:
-            lines = f.readlines()
-            legi_train = [l.rstrip() for l in lines]
-
-        with open("./Dataset/CelebA/legi_eval.txt", 'r') as f:
             lines = f.readlines()
             legi_eval = [l.rstrip() for l in lines]
 
@@ -98,20 +83,15 @@ if __name__ == "__main__":
     ])
     mask_transforms = transforms.ToTensor()
 
-    if args.mask_type == "irr_mask":
-        mask_dir = args.irr_mask_dir
-        img_dir = ""
-    elif args.mask_type == "face_mask":
+
+    if args.mask_type == "face_mask":
         mask_dir = args.mask_dir
         img_dir = args.img_dir
-    elif args.mask_type == "cnt_mask":
-        mask_dir = ""
-        img_dir = ""
     else:
         raise ValueError("Mask_type [%s] not recognized. Please choose among ['face_mask', 'cnt_mask', 'irr_mask']  " % args.mask_type)
 
     dataset_train = CelebA("train",args.data_dir, img_dir, mask_dir, legi_train, args.sizes, args.mask_type, transform=img_transforms, mask_transform=mask_transforms)
-    dataset_eval = CelebA("test",args.data_dir, img_dir, mask_dir, legi_test, args.sizes, args.mask_type, transform=img_transforms, mask_transform=mask_transforms)
+    dataset_eval = CelebA("test",args.data_dir, img_dir, mask_dir, legi_eval, args.sizes, args.mask_type, transform=img_transforms, mask_transform=mask_transforms)
 
     train_loader = data.DataLoader(dataset_train, batch_size=args.batch_size, shuffle=True, num_workers=12, pin_memory=True, drop_last=True)
     eval_loader = data.DataLoader(dataset_eval, batch_size=args.batch_size, shuffle=False,  num_workers=12, pin_memory=True, drop_last=True)
