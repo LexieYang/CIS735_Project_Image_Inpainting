@@ -25,7 +25,7 @@ Pre-trained weights and test model
 # To test the model
 python test.py
 ```
-You can download the pretrained model from here and save it in a new directory, model_weights/. You can check the qualitative results under the Visual/test/ folder.
+You can download the pretrained model from [here](https://drive.google.com/drive/folders/1n4vENLIeHIcB254hddS6Lq2xNzYShi-y?usp=sharing) and save it in a new directory, model_weights/. You can check the qualitative results under the Visual/test/ folder.
 
 # Code Structure
 - train.py: the entry point for training.
